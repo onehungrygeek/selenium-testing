@@ -47,5 +47,32 @@ def seleniumTest():
     # driver_instance.close()
 
 
+class GoogleTestCase(unittest.TestCase):
+    """
+    Simple unit testing module
+    """
+
+    def setUp(self):
+        """
+        Set up the browser instance with chromedriver and chrome_options
+        """
+
+        self.chromedriver = os.getcwd() + "/chromedriver"
+        self.chrome_options = webdriver.ChromeOptions()
+        self.chrome_options.add_argument("--disable-infobars")
+        self.browser = webdriver.Chrome(self.chromedriver,
+                                        chrome_options=self.chrome_options)
+        self.addCleanup(self.browser.close)
+
+    def testPageTitle(self):
+        """
+        Test page title in above browser instance
+        """
+
+        self.browser.get('http://www.google.com')
+        self.assertIn('Google', self.browser.title)
+
+
 if __name__ == '__main__':
     seleniumTest()
+    unittest.main(verbosity=2)
