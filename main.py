@@ -61,7 +61,7 @@ class GoogleTestCase(unittest.TestCase):
         self.chrome_options = webdriver.ChromeOptions()
         self.chrome_options.add_argument("--disable-infobars")
         self.driver_instance = webdriver.Chrome(self.chromedriver,
-                                        chrome_options=self.chrome_options)
+                                                chrome_options=self.chrome_options)
         self.addCleanup(self.driver_instance.close)
 
     def testPageTitle(self):
