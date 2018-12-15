@@ -32,13 +32,13 @@ def seleniumTest():
     assert "Google" in driver_instance.title
 
     # Find element named 'q' (You can find any element name by inspecting a page source)
-    element = driver_instance.find_element_by_name("q")
+    search_field = driver_instance.find_element_by_name("q")
 
     # Clear any prepopulated text in the input field
-    element.clear()
+    search_field.clear()
 
     # Send keys and return at the end
-    element.send_keys("Selenium is awesome!" + Keys.RETURN)
+    search_field.send_keys("Selenium is awesome!" + Keys.RETURN)
 
     # Assert that we don't have 'No results found' anywhere in the page source
     assert "No result found" not in driver_instance.page_source
@@ -60,17 +60,17 @@ class GoogleTestCase(unittest.TestCase):
         self.chromedriver = os.getcwd() + "/chromedriver"
         self.chrome_options = webdriver.ChromeOptions()
         self.chrome_options.add_argument("--disable-infobars")
-        self.browser = webdriver.Chrome(self.chromedriver,
+        self.driver_instance = webdriver.Chrome(self.chromedriver,
                                         chrome_options=self.chrome_options)
-        self.addCleanup(self.browser.close)
+        self.addCleanup(self.driver_instance.close)
 
     def testPageTitle(self):
         """
         Test page title in above browser instance
         """
 
-        self.browser.get('http://www.google.com')
-        self.assertIn('Google', self.browser.title)
+        self.driver_instance.get('http://www.google.com')
+        self.assertIn('Google', self.driver_instance.title)
 
 
 if __name__ == '__main__':
