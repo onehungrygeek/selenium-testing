@@ -22,11 +22,10 @@ def seleniumTest():
 
     # Create a driver instance with above chrome_options and
     # provide executable chromedriver path for the browser
-    driver_instance = webdriver.Chrome(chromedriver,
-                                       chrome_options=chrome_options)
+    driver_instance = webdriver.Chrome(chromedriver, chrome_options=chrome_options)
 
     # Open a link in the browser
-    driver_instance.get('https://www.google.com/')
+    driver_instance.get("https://www.google.com/")
 
     # Assert that the tab title will contain 'Google'
     assert "Google" in driver_instance.title
@@ -60,8 +59,9 @@ class GoogleTestCase(unittest.TestCase):
         self.chromedriver = os.getcwd() + "/chromedriver"
         self.chrome_options = webdriver.ChromeOptions()
         self.chrome_options.add_argument("--disable-infobars")
-        self.driver_instance = webdriver.Chrome(self.chromedriver,
-                                                chrome_options=self.chrome_options)
+        self.driver_instance = webdriver.Chrome(
+            self.chromedriver, chrome_options=self.chrome_options
+        )
         self.addCleanup(self.driver_instance.close)
 
     def testPageTitle(self):
@@ -69,10 +69,10 @@ class GoogleTestCase(unittest.TestCase):
         Test page title in above browser instance
         """
 
-        self.driver_instance.get('http://www.google.com')
-        self.assertIn('Google', self.driver_instance.title)
+        self.driver_instance.get("http://www.google.com")
+        self.assertIn("Google", self.driver_instance.title)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     seleniumTest()
     unittest.main(verbosity=2)
